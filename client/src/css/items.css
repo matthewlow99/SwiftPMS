@@ -1,0 +1,131 @@
+.contactLinkContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 10px;
+    margin: 20px 20px 20px 20px;
+    border-bottom: 1px solid gray;
+}
+.contactLinkTextContainer {
+    padding: 0;
+    margin: 0;
+    flex: 1;
+}
+.contactLinkTextContainer > h2, p {
+    margin: 0;
+}
+.contactLinkTextContainer > h2{
+    font-size: 14pt;
+}
+ .contactLinkContainer:hover {
+     background-color: blue;
+     border-radius: 10px;
+     cursor: pointer;
+ }
+ .contactPageGridContainer {
+     margin-right: auto;
+     margin-left: auto;
+     width: 90%;
+ }
+ .contactPageGridContainer > h2 {
+     display: flex;
+     background-color: red;
+ }
+ .contactPageGridEntry {
+
+     /*height: max-content;*/
+     padding-top: 10px;
+     padding-bottom: 10px;
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     border: 1px solid black;
+     border-radius: 10px;
+     margin-top: 5px;
+     background-color: #2c3e50;
+     /*opacity: .8;*/
+ }
+ .contactPageGridEntry #contactName {
+     /*color: red;*/
+     font-size: 16pt;
+     font-weight: 500;
+ }
+ .contactPageGridEntry:hover {
+     opacity: 1;
+     cursor: pointer;
+ }
+
+ .listTileContainer {
+     display: flex;
+     flex-direction: column;
+     /*gap: 5px;*/
+     background-color: #2c3e50;
+     color: #f1f1f1;
+     padding: 1% 5% 1% 1%;
+     width: fit-content;
+     border-radius: 20px;
+     border: 1px solid black;
+ }
+.listTileContainer > h4 {
+    margin: 0;
+    font-size: 13pt;
+    font-style: italic;
+}
+.colorItemBackground {
+    background-color: greenyellow;
+    color: black;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: fit-content;
+}
+.entryContainer{
+    display: flex;
+    /*display: grid;*/
+    /*grid-template-columns: 5% 7% 7% 51% 10% 5% 5%;*/
+    /*width: 100%;*/
+    /*flex: 1;*/
+    width: 100%;
+    justify-content: space-evenly;
+    border-collapse: collapse;
+    border-bottom: 3px solid #000000;
+    font-size: 13pt;
+    /*margin-top: 5px;*/
+    margin-bottom: 5px;
+    padding: 15px 30px;
+    border-radius: 10px;
+    background-color: #656a6e;
+    color: black;
+    opacity: 1;
+}
+.entryContainer:hover {
+    cursor: pointer;
+    background-color: gray;
+
+}
+.entryContainer  p {
+    text-align: left;
+    width: 100%;
+    font-weight: bold;
+}
+.entryContainer * {
+    margin: 0;
+}
+.entryLinkContainer {
+    display: flex;
+    justify-content: space-evenly;
+    border-collapse: collapse;
+    border-bottom: 3px solid #000000;
+    font-size: 13pt;
+    /*margin-bottom: 20px;*/
+    padding: 20px 10px;
+    border-radius: 20px;
+    background-color: #656a6e;
+    margin-bottom: 5px;
+}
+.entryLinkContainer:hover {
+    cursor: pointer;
+    background-color: gray;
+}

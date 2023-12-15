@@ -1,0 +1,41 @@
+.noteContainer {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #a6a6a6;
+    border-radius: 10px;
+    background-color: #858b91;
+    /*background-color: #ededed;*/
+}
+.notePageContainer {
+    /*width: 80%;*/
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+.noteTextInputField {
+    display: flex;
+    height: auto;
+    border-radius: 5px;
+    resize: none;
+    padding: 10px;
+    background-color: #757a7f;
+    margin-bottom: 5px;
+    /*width: 60%;*/
+}
+.noteTextInputField::placeholder{
+    color: black;
+}
+.postNoteButton {
+    color: white;
+    margin-top: 0;
+    margin-bottom: 10px;
+    background-color: #0c0c0c;
+    width: fit-content;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+.postNoteButton:hover {
+    color: #476b87;
+    background-color: black;
+    cursor: pointer;
+}

@@ -1,0 +1,97 @@
+.bodyContainer {
+    display: flex;
+    flex: 1;
+    height: 100%;
+    min-height: 200px;
+    margin: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-color: #454a4e;
+}
+.removeMarginsAndPadding {
+    margin: 0;
+    padding: 0;
+}
+.headerContainer {
+    /*background-color: #1eb521;*/
+    /*background-color: #2c3e50;*/
+    background-color: #0a0619;
+    margin: 0;
+    padding: 0;
+    height: 110px;
+    /*border-bottom-right-radius: 10px;*/
+    /*border-bottom-left-radius: 10px;*/
+    border-bottom: 2px solid gray;
+    display: flex;
+    width: 100vw;
+    flex-direction: column;
+    position: static;
+    justify-content: space-between;
+}
+.flexRowAlignCenter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    justify-content: space-evenly;
+}
+.headerButtonRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /*flex: 1;*/
+    /*height: 70px;*/
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.headerButtonText {
+    margin: 0;
+    font-size: 14pt;
+    font-weight: 500;
+}
+.headerButtonText:hover{
+    font-weight: 600;
+    cursor: pointer;
+    /*color: ;*/
+}
+.listPageButton {
+    font-weight: 500;
+    font-size: 15pt;
+}
+.listPageButton:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+.sidebarContainer {
+    height: 100%;
+    width: 80px;
+    /*background-color: #0a0619;*/
+    background-color: #0c0c0c;
+    border-right: 2px solid gray;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*justify-content: space-evenly;*/
+}
+.sidebarContainer > p {
+    height: 70px;
+    /*border-top: 1px solid black;*/
+    border-bottom: 1px solid gray;
+    font-weight: 400;
+    width: 100%;
+    vertical-align: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sidebarContainer > p:hover {
+    /*background-color: #2c2728;*/
+    color: #476b87;
+    background-color: black;
+}
+.hoverCursor:hover {
+    cursor: pointer;
+}

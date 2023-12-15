@@ -1,0 +1,39 @@
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: fit-content;
+    align-items: center;
+    /*width: 100%;*/
+    padding: 100px 60px 50px 60px;
+    background-color: #171324;
+    /*width: 50%;*/
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    /*padding-bottom: 50px;*/
+    gap: 30px;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+.loginContainer > h2 {
+    font-size: 26pt;
+    color: black;
+    margin: 0;
+}
+.loginContainer > input {
+    width: 380px;
+    height: 35px;
+}
+.loginContainer button {
+    background-color: black;
+    min-width: 75px;
+    height: 35px;
+}
+.subFormButton {
+    color: gray;
+}
+.subFormButton:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
