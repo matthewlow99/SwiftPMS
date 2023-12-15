@@ -1,5 +1,6 @@
 import {createContext, useContext, useEffect, useState} from "react";
 import {apiRequest} from "../../helpers/api/apiFunctionHelpers";
+import LoadingScreen from "../../components/Loading/LoadingScreen";
 
 const _CustomerListContext = createContext()
 
@@ -19,7 +20,7 @@ export function CustomerListContext({children}){
         await apiRequest('customer/list').then(data => {setCustomers(data)})
     }
 
-    if(loading) return <h2>Loading</h2>;
+    if(loading) return <LoadingScreen />;
     return <_CustomerListContext.Provider value={{customers, load}}>
         {children}
     </_CustomerListContext.Provider>

@@ -5,7 +5,8 @@ async function connectDB(){
     // console.log(mongo)
     try{
         console.log('connecting to db')
-        const client = new mongo.MongoClient('mongodb://127.0.0.1:27017/SwiftDevelopmentDB')
+        // const client = new mongo.MongoClient('mongodb://127.0.0.1:27017/SwiftDevelopmentDB')
+        const client = new mongo.MongoClient('mongodb+srv://matthewlow99:11B4SAsdM8lMsIW0@swiftpms.crm8qn2.mongodb.net/SwiftPMS')
         const db = await client.connect()
         console.log('connected')
         return db.db();

@@ -1,5 +1,6 @@
 import {createContext, useContext, useEffect, useState} from "react";
 import {apiRequest} from "../../helpers/api/apiFunctionHelpers";
+import LoadingScreen from "../../components/Loading/LoadingScreen";
 
 const _ContactContext = createContext();
 
@@ -22,7 +23,7 @@ export function ContactContext({children}){
 
     useEffect(() => { load().then() }, []);
 
-    if(loading) return <h1>Loading...</h1>
+    if(loading) return <LoadingScreen />
     return <_ContactContext.Provider value={{contacts, customers, load}}>
         {children}
     </_ContactContext.Provider>

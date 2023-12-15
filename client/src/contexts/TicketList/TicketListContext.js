@@ -1,5 +1,6 @@
 import React, {createContext, useContext, useEffect, useState} from "react"
 import {apiRequest} from "../../helpers/api/apiFunctionHelpers";
+import LoadingScreen from "../../components/Loading/LoadingScreen";
 
 const TicketListDataContext = createContext();
 
@@ -27,7 +28,7 @@ export function TicketListContext({children}){
 
     useEffect(() => { load().then() }, [])
 
-    if(loading) return <h2>Loading</h2>
+    if(loading) return <LoadingScreen />
     return <TicketListDataContext.Provider value={{tickets, contacts, customers, projects, load}}>
         {children}
     </TicketListDataContext.Provider>

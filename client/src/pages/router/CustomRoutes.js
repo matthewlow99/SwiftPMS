@@ -22,12 +22,13 @@ import {ProjectDataContext} from "../../contexts/ProjectContext/ProjectDataConte
 import {ContactDataContext} from "../../contexts/ContactContext/ContactDataContext";
 import Login from "../Login/Login";
 import {SessionContext} from "../../contexts/_SessionContexts/SessionContext";
+import AuthHandler from "../AuthHandler/AuthHandler";
 
 function CustomRoutes(){
 
     return (<>
             <Routes>
-                <Route path={'/'} element={<CustomerListContext><CustomerList /></CustomerListContext>}/>
+                <Route path={'/'} element={<AuthHandler />}/>
                 <Route path={'/login'} element={<Login menuIndex={0}/>} />
                 <Route path={'/create'} element={<Login menuIndex={1}/>} />
                 <Route path={'/tickets'} element={<TicketListContext><TicketList text={'first page'}/></TicketListContext>}/>

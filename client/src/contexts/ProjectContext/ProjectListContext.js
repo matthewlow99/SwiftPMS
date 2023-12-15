@@ -1,5 +1,6 @@
 import {createContext, useContext, useEffect, useState} from "react";
 import {apiRequest} from "../../helpers/api/apiFunctionHelpers";
+import LoadingScreen from "../../components/Loading/LoadingScreen";
 
 const _ProjectListContext = createContext()
 
@@ -22,7 +23,7 @@ export function ProjectListContext({children}){
 
     useEffect(() => {load().then()}, []);
 
-
+    if(loading) return <LoadingScreen />
     return <_ProjectListContext.Provider value={{projects, customers, load}}>
         {children}
     </_ProjectListContext.Provider>

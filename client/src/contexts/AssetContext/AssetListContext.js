@@ -1,5 +1,6 @@
 import {createContext, useContext, useEffect, useState} from "react";
 import {apiRequest} from "../../helpers/api/apiFunctionHelpers";
+import LoadingScreen from "../../components/Loading/LoadingScreen";
 
 const AssetListDataContext = createContext();
 
@@ -25,7 +26,7 @@ export function AssetListContext({children}){
         isLoading(false)
     }
 
-    if(loading) return <h2>Loading...</h2>
+    if(loading) return <LoadingScreen />
     return <AssetListDataContext.Provider value={{assets, customers, load}}>
         {children}
     </AssetListDataContext.Provider>
