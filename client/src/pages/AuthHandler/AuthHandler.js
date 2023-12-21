@@ -5,16 +5,10 @@ import LoadingScreen from "../../components/Loading/LoadingScreen";
 
 function AuthHandler(){
 
-    const session = useSessionContext();
+    const {validateToken} = useSessionContext();
     const nav = useNavigate();
-    useEffect(() => {
-        if(session.checkLoginStatus()){
-            nav('/customers')
-        }
-        else {
-            nav('/login')
-        }
-    }, []);
+
+    useEffect(() => { validateToken(); }, []);
 
     return (<>
         <LoadingScreen />

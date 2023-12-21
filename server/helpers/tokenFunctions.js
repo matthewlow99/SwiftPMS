@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const db = require('../db/db_connect')
+const crypto = require('crypto')
 
 async function generateTokens(userID){
     let accessToken = "";
@@ -21,6 +22,11 @@ async function generateTokens(userID){
 
     return {accessToken, refreshToken};
 }
+function hashString(str){
+    const hash = crypto.createHash('sha256')
+    hash.update(str)
+    return hash.digest('hex');
+}
 
 
-module.exports = {generateTokens}
+module.exports = {generateTokens, hashString}

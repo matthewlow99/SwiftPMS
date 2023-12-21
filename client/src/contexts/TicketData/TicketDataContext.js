@@ -1,5 +1,5 @@
 import {createContext, useContext, useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {apiRequest} from "../../helpers/api/apiFunctionHelpers";
 import Item from "../../pages/item/Item";
 import TicketDataClass from "../../classes/TicketDataClass";
@@ -17,9 +17,11 @@ export function TicketDataContext(){
     const {ticketID} = useParams();
     const [ticket, setTicket] = useState(new TicketDataClass(ticketID))
 
+    const nav = useNavigate();
+
     async function load(){
         await Promise.all([
-            ticket.loadObject(),
+            ticket.loadObject().catch(() => {nav('/')}),
             waitSeconds()
         ]).then(update).then(() => {isLoading(false)})
     }
@@ -27,7 +29,7 @@ export function TicketDataContext(){
         setTicket(cloneObject(ticket))
     }
     async function postNote(note){
-        await ticket.postNote(note).then(load)
+        await ticket.postNote(note).then(load).catch(() => {nav('/')})
     }
     function renderDetailView(){
         return (

@@ -12,6 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
 import {useSessionContext} from "../../contexts/_SessionContexts/SessionContext";
+import {faBell} from "@fortawesome/free-solid-svg-icons/faBell";
 
 function SideBar(){
 
@@ -19,6 +20,7 @@ function SideBar(){
     const {clearTokens} = useSessionContext();
     return (
         <div className={'sidebarContainer'}>
+            <p className={'headerButtonText'} onClick={() => {nav('/projects')}} title={'Notifications'}><FontAwesomeIcon icon={faBell} style={{marginRight: 5}}/> </p>
             <p className={'headerButtonText'} onClick={() => {nav('/customers')}} title={'Customers'}><FontAwesomeIcon icon={faBuilding} style={{marginRight: 5}}/> </p>
             <p className={'headerButtonText'} onClick={() => {nav('/tickets')}} title={'Tickets'}><FontAwesomeIcon icon={faTicket} style={{marginRight: 5}}/> </p>
             <p className={'headerButtonText'} onClick={() => {nav('/assets')}} title={'Devices'}><FontAwesomeIcon icon={faDesktop} style={{marginRight: 5}}/> </p>
@@ -29,7 +31,6 @@ function SideBar(){
             <p className={'headerButtonText'} onClick={() => {nav('/projects')}} title={'Settings'}><FontAwesomeIcon icon={faGear} style={{marginRight: 5}}/> </p>
             <p className={'headerButtonText'} onClick={() => {nav('/projects')}} title={'User Profile'}><FontAwesomeIcon icon={faUser} style={{marginRight: 5}}/> </p>
             <p className={'headerButtonText'} onClick={() => {clearTokens().then(() => nav('/login'))}} title={'Sign Out'}><FontAwesomeIcon icon={faSignOut} style={{marginRight: 5}}/> </p>
-            {/*<p className={'headerButtonText'}>Backup Monitoring</p>*/}
         </div>
     )
 }

@@ -1,8 +1,8 @@
+import {useNavigate} from "react-router-dom";
 
-// const address = 'http://192.168.1.121:3050'
+const address = 'http://192.168.1.121:3050'
 // const address = '';
-const address = 'https://swiftpms.dev'
-
+// const address = 'https://swiftpms.dev'
 let refreshingToken = null;
 export async function refreshToken(){
     if(refreshingToken) return refreshingToken;
@@ -26,7 +26,7 @@ export async function refreshToken(){
     }
 }
 
-export async function apiRequest(route, body={}){
+export async function apiRequest(route, body={}, returnResponse=false){
     const settings = {
         headers: {
             "content-type": "application/json",
@@ -36,20 +36,21 @@ export async function apiRequest(route, body={}){
         method: "POST",
         body: JSON.stringify(body)
     }
-    try{
-        const response = await fetch(`${address}/${route}`, settings)
-        console.log('Status ' + response.status + ' from ' + `${address}/${route}`)
 
-        if(response.status === 401){
+    const response = await fetch(`${address}/${route}`, settings)
+    console.log('Status ' + response.status + ' from ' + `${address}/${route}`)
+
+    if(returnResponse) return response;
+
+    switch (response.status) {
+        case 401:
             await refreshToken()
             return apiRequest(route, body);
-        }
-
-        const data = await response.json()
-        data.responseStatus = response.status;
-        return data;
-    } catch(e){
-        console.log(e)
-        return []
+        case 500:
+            throw new Error('Server Error')
+        default:
+            const data = await response.json()
+            data.responseStatus = response.status;
+            return data;
     }
 }

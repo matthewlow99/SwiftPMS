@@ -1,5 +1,5 @@
 import {createContext, useContext, useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import CustomerDetailClass from "../../classes/CustomerDetailClass";
 import Item from "../../pages/item/Item";
 import {waitSeconds} from "../../helpers/misc/miscHelpers";
@@ -13,23 +13,23 @@ export function useCustomerDataContext(){
 export function CustomerDataContext({children}){
     const [loading, isLoading] = useState(true)
     const [customer, setCustomer] = useState({})
-
+    const nav = useNavigate();
     const obj = new CustomerDetailClass(useParams().customerID)
 
     async function load(){
         isLoading(true)
         // await obj.loadObject().then(() => {setCustomer(obj)})
         await Promise.all([
-            obj.loadObject().then(() => {setCustomer(obj)}),
+            obj.loadObject().then(() => {setCustomer(obj)}).catch(() => {nav('/')}),
             waitSeconds()
         ])
         isLoading(false)
     }
     async function update(){
-        await obj.loadObject().then(() => {setCustomer(Object.assign({}, obj))})
+        await obj.loadObject().then(() => {setCustomer(Object.assign({}, obj))}).catch(() => {nav('/')})
     }
     async function postNote(note){
-        await obj.postNote(note)
+        await obj.postNote(note).catch(() => {nav('/')})
         await update();
     }
     function renderDetailView(){

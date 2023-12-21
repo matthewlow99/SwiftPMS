@@ -1,6 +1,7 @@
 import React, {createContext, useContext, useEffect, useState} from "react"
 import {apiRequest} from "../../helpers/api/apiFunctionHelpers";
 import LoadingScreen from "../../components/Loading/LoadingScreen";
+import {useNavigate} from "react-router-dom";
 
 const TicketListDataContext = createContext();
 
@@ -17,12 +18,14 @@ export function TicketListContext({children}){
     const [customers, setCustomers] = useState([])
     const [projects, setProjects] = useState([])
 
+    const nav = useNavigate();
+
     async function load(){
         isLoading(true)
         await Promise.all([
-            apiRequest('ticket/list').then(data => {setTickets(data)}),
-            apiRequest('customer/list').then(data => {setCustomers(data)}),
-            apiRequest('project/list').then(data => {setProjects(data)})
+            apiRequest('ticket/list').then(data => {setTickets(data)}).catch(() => {nav('/')}),
+            apiRequest('customer/list').then(data => {setCustomers(data)}).catch(() => {nav('/')}),
+            apiRequest('project/list').then(data => {setProjects(data)}).catch(() => {nav('/')})
         ]).then(() => {isLoading(false)})
     }
 

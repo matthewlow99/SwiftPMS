@@ -1,6 +1,6 @@
 import React, {createContext, useContext, useEffect, useState} from "react"
 import Item from "../../pages/item/Item";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import ProjectDataClass from "../../classes/ProjectDataClass";
 import {cloneObject, waitSeconds} from "../../helpers/misc/miscHelpers";
 import LoadingScreen from "../../components/Loading/LoadingScreen";
@@ -14,11 +14,11 @@ export function ProjectDataContext(){
     const [loading, isLoading] = useState(true)
     const {projectID} = useParams();
     const [project, setProject] = useState(new ProjectDataClass(projectID))
-
+    const nav = useNavigate()
 
     async function load(){
         await Promise.all([
-            project.loadObject().then(update),
+            project.loadObject().then(update).catch(() => {nav('/')}),
             waitSeconds()
         ]).then(() => {isLoading(false)})
 
@@ -30,7 +30,7 @@ export function ProjectDataContext(){
         setProject(cloneObject(project))
     }
     async function postNote(note){
-        await project.postNote(note).then(load)
+        await project.postNote(note).then(load).catch(() => {nav('/')})
     }
     useEffect(() => {load().then()}, []);
 
