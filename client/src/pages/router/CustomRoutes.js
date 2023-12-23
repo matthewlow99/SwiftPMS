@@ -23,6 +23,7 @@ import {ContactDataContext} from "../../contexts/ContactContext/ContactDataConte
 import Login from "../Login/Login";
 import {SessionContext} from "../../contexts/_SessionContexts/SessionContext";
 import AuthHandler from "../AuthHandler/AuthHandler";
+import EndpointList from "../endpoint/EndpointList";
 
 function CustomRoutes(){
 
@@ -41,6 +42,7 @@ function CustomRoutes(){
                 <Route path={'/asset/:assetID'} element={<AssetDataContext />}/>
                 <Route path={'/projects'} element={<ProjectListContext><ProjectList /></ProjectListContext>} />
                 <Route path={'/project/:projectID'} element={<ProjectDataContext />} />
+                <Route path={'/endpoints'} element={<EndpointList />}/>
             </Routes>
     </>)
 }

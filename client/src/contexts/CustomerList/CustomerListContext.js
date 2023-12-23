@@ -21,9 +21,11 @@ export function CustomerListContext({children}){
     async function load(){
         await apiRequest('customer/list').then(data => {setCustomers(data)}).catch(() => {nav('/')})
     }
-
+    async function createNew(customerName, customerEmail, customerPhone){
+        await apiRequest('customer/new', {customerName, customerEmail, customerPhone, color: '#FFFFFF'}).then(load)
+    }
     if(loading) return <LoadingScreen />;
-    return <_CustomerListContext.Provider value={{customers, load}}>
+    return <_CustomerListContext.Provider value={{customers, load, createNew}}>
         {children}
     </_CustomerListContext.Provider>
 }

@@ -14,9 +14,10 @@ function App() {
         <Header/>
         <div style={{display: 'flex', flexDirection: 'row', flex: 1, overflowX: 'hidden', overflowY: 'hidden'}}>
             {session.checkLoginStatus() && <SideBar/>}
-            <div className={"bodyContainer"}>
+            <div className={'w-full'}>
                 <CustomRoutes />
             </div>
+
         </div>
     </>
   );

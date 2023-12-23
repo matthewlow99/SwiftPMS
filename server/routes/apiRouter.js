@@ -12,6 +12,8 @@ const contactRouter = require('./contacts/contact_router')
 const tenantRouter = require('./company/tenant_router')
 const userRouter = require('./company/user_router')
 const loginRouter = require('./login/login_router')
+const endpointRouter = require('./endpoints/endpoint_router')
+
 const {TokenExpiredError} = require("jsonwebtoken");
 
 app.use('/pub', loginRouter)
@@ -39,5 +41,6 @@ app.use('/ticket', ticketRouter)
 app.use('/contact', contactRouter)
 app.use('/tenant', tenantRouter)
 app.use('/user', userRouter)
+app.use('/endpoint', endpointRouter)
 
 module.exports = app;

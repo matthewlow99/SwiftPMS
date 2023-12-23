@@ -5,7 +5,7 @@ import {
     faDesktop,
     faFolder,
     faGear, faList,
-    faListDots, faPencil, faSignOut,
+    faListDots, faPencil, faServer, faSignOut,
     faTicket,
     faUser,
     faUsers
@@ -13,6 +13,7 @@ import {
 import {useNavigate} from "react-router-dom";
 import {useSessionContext} from "../../contexts/_SessionContexts/SessionContext";
 import {faBell} from "@fortawesome/free-solid-svg-icons/faBell";
+import {faGears} from "@fortawesome/free-solid-svg-icons/faGears";
 
 function SideBar(){
 
@@ -20,16 +21,17 @@ function SideBar(){
     const {clearTokens} = useSessionContext();
     return (
         <div className={'sidebarContainer'}>
-            <p className={'headerButtonText'} onClick={() => {nav('/projects')}} title={'Notifications'}><FontAwesomeIcon icon={faBell} style={{marginRight: 5}}/> </p>
+            {/*<p className={'headerButtonText'} onClick={() => {nav('/projects')}} title={'Notifications'}><FontAwesomeIcon icon={faBell} style={{marginRight: 5}}/> </p>*/}
             <p className={'headerButtonText'} onClick={() => {nav('/customers')}} title={'Customers'}><FontAwesomeIcon icon={faBuilding} style={{marginRight: 5}}/> </p>
             <p className={'headerButtonText'} onClick={() => {nav('/tickets')}} title={'Tickets'}><FontAwesomeIcon icon={faTicket} style={{marginRight: 5}}/> </p>
             <p className={'headerButtonText'} onClick={() => {nav('/assets')}} title={'Devices'}><FontAwesomeIcon icon={faDesktop} style={{marginRight: 5}}/> </p>
             <p className={'headerButtonText'} onClick={() => {nav('/contacts')}} title={'Contacts'}><FontAwesomeIcon icon={faBuildingUser} style={{marginRight: 5}}/> </p>
             <p className={'headerButtonText'} onClick={() => {nav('/projects')}} title={'Projects'}><FontAwesomeIcon icon={faFolder} style={{marginRight: 5}}/> </p>
-            <p className={'headerButtonText'} onClick={() => {nav('/projects')}} title={'Users'}><FontAwesomeIcon icon={faUsers} style={{marginRight: 5}}/> </p>
-            <p className={'headerButtonText'} onClick={() => {nav('/projects')}} title={'Logs'}><FontAwesomeIcon icon={faPencil} style={{marginRight: 5}}/> </p>
-            <p className={'headerButtonText'} onClick={() => {nav('/projects')}} title={'Settings'}><FontAwesomeIcon icon={faGear} style={{marginRight: 5}}/> </p>
-            <p className={'headerButtonText'} onClick={() => {nav('/projects')}} title={'User Profile'}><FontAwesomeIcon icon={faUser} style={{marginRight: 5}}/> </p>
+            <p className={'headerButtonText'} onClick={() => {nav('/endpoints')}} title={'Endpoint Logging'}><FontAwesomeIcon icon={faServer} style={{marginRight: 5}}/></p>
+            {/*<p className={'headerButtonText'} onClick={() => {nav('/projects')}} title={'Users'}><FontAwesomeIcon icon={faUsers} style={{marginRight: 5}}/> </p>*/}
+            {/*<p className={'headerButtonText'} onClick={() => {nav('/projects')}} title={'Logs'}><FontAwesomeIcon icon={faPencil} style={{marginRight: 5}}/> </p>*/}
+            {/*<p className={'headerButtonText'} onClick={() => {nav('/projects')}} title={'Settings'}><FontAwesomeIcon icon={faGear} style={{marginRight: 5}}/> </p>*/}
+            {/*<p className={'headerButtonText'} onClick={() => {nav('/projects')}} title={'User Profile'}><FontAwesomeIcon icon={faUser} style={{marginRight: 5}}/> </p>*/}
             <p className={'headerButtonText'} onClick={() => {clearTokens().then(() => nav('/login'))}} title={'Sign Out'}><FontAwesomeIcon icon={faSignOut} style={{marginRight: 5}}/> </p>
         </div>
     )

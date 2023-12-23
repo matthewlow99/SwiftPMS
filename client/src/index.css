@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   padding: 0;
@@ -6,7 +10,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #454a4e;
+  /*background-color: #454a4e;*/
+  background-color: #4f5460;
+  /*background-color: #67686c;*/
+
 }
 #root {
   display: flex;
@@ -16,4 +23,27 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.width-100p {
+  width: 100%;
+}
+.width-90p {
+  width: 90%;
+}
+@layer components {
+  .custom-table-cell {
+    @apply border-y border-black text-left py-5 text-lg flex-1 font-bold;
+  }
+  .colorDot {
+    @apply w-1 h-1 bg-amber-300 border border-r-4;
+  }
+  .list-view-container {
+    @apply flex flex-col mx-auto p-5;
+  }
+  .list-button {
+    @apply p-2 mx-2 border border-black bg-gray-700 text-white;
+  }
+  .list-row {
+    @apply even:bg-gray-600 odd:bg-[#4f5463] hover:cursor-pointer hover:underline;
+  }
 }
