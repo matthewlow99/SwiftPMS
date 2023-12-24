@@ -27,16 +27,14 @@ function CreateTicketForm({dismiss}){
 
     return (
         <div className={'modalBackground'}>
-            <div className={'modalContainer'}>
-                <h2 id={'closeButton'} onClick={() => {dismiss()}}>X</h2>
-                <h1 style={{textAlign: 'center'}}>Create New Ticket</h1>
+            <div className={'flex flex-col items-left bg-gray-400 p-10 gap-5 w-[20%] rounded border-black border-[1px] shadow'}>
+                <h1 className={'text-left font-bold'}>Create New Ticket</h1>
+                <input className={'border-black border-[1px] p-1 rounded'} placeholder={'Ticket Subject'} defaultValue={subject} onChange={(e) => {setSubject(e.target.value)}}/>
 
-                <input placeholder={'Ticket Subject'} defaultValue={subject} onChange={(e) => {setSubject(e.target.value)}}/>
-
-                <textarea placeholder={'Problem description'} defaultValue={desc} onChange={(e) => {setDesc(e.target.value)}}/>
+                <textarea className={'border-black border-[1px] p-1 rounded'} placeholder={'Problem description'} defaultValue={desc} onChange={(e) => {setDesc(e.target.value)}}/>
 
                 <div>
-                    <select onChange={({target}) => { setCustomerID(target.value) }} style={{height: 40}}>
+                    <select onChange={({target}) => { setCustomerID(target.value) }} className={'w-full py-2 rounded border-[1px] border-black'}>
                         <option value={null}>Select Customer</option>
                         {
                             context.customers.map(e => {
@@ -47,7 +45,7 @@ function CreateTicketForm({dismiss}){
                 </div>
 
                 <div>
-                    <select onChange={({target}) => { setProjectID(target.value) }} style={{height: 40}}>
+                    <select onChange={({target}) => { setProjectID(target.value) }} className={'w-full py-2 rounded border-[1px] border-black'}>
                         <option value={null}>Select Project</option>
                         {
                             context.projects.filter(g => g?.customer[0]?._id === customerID).map(e => {
@@ -58,8 +56,9 @@ function CreateTicketForm({dismiss}){
                 </div>
 
 
-                <div id={'buttonRow'}>
-                    <h2 style={{textAlign: 'center'}} onClick={createTicket}>Create</h2>
+                <div className={'flex flex-row gap-2'}>
+                    <h2 className={'bg-blue-500 w-fit px-3 py-1 border-black border-[1px] rounded shadow font-bold hover:bg-blue-600 hover:cursor-pointer transition-all text-white'} onClick={createTicket}>Create</h2>
+                    <h2 className={'bg-gray-500 w-fit px-3 py-1 border-black border-[1px] rounded shadow font-bold hover:bg-gray-600 hover:cursor-pointer transition-all text-white'} onClick={dismiss}>Cancel</h2>
                 </div>
 
             </div>

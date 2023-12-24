@@ -26,7 +26,7 @@ export async function refreshToken(){
     }
 }
 
-export async function apiRequest(route, body={}, returnResponse=false){
+export async function apiRequest(route, body={}, returnResponse=false, appendStatus=false){
     const settings = {
         headers: {
             "content-type": "application/json",
@@ -50,7 +50,10 @@ export async function apiRequest(route, body={}, returnResponse=false){
             throw new Error('Server Error')
         default:
             const data = await response.json()
-            data.responseStatus = response.status;
+            try{
+                if(appendStatus) data.responseStatus = response.status;
+            } catch (e){console.log(e)}
+
             return data;
     }
 }

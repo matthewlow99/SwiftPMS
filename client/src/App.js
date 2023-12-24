@@ -12,13 +12,15 @@ function App() {
   return (
     <>
         <Header/>
-        <div style={{display: 'flex', flexDirection: 'row', flex: 1, overflowX: 'hidden', overflowY: 'hidden'}}>
+        <div className={'flex flex-row '}>
             {session.checkLoginStatus() && <SideBar/>}
             <div className={'w-full'}>
                 <CustomRoutes />
             </div>
-
         </div>
+
+
+
     </>
   );
 }

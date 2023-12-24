@@ -26,7 +26,7 @@ export function SessionContext({children}){
         }
     }
     async function login(email, password){
-        await apiRequest('pub/login', {email, password}).then(data => {
+        await apiRequest('pub/login', {email, password}, false, true).then(data => {
             if(data.responseStatus === 200) {
                 saveTokens(data.accessToken, data.refreshToken)
                 nav('/customers')

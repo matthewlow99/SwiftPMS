@@ -7,7 +7,13 @@ export function validateInput(arr=[]){
     })
     return isValid;
 }
-
+export function validateJSONObj(obj){
+    for(const o of Object.keys(obj)){
+        if(obj[o] === "" || obj[o] === null)
+            return false;
+    }
+    return true;
+}
 export function removeDuplicatesJSON(array, key) {
     const uniqueMap = new Map();
     array.forEach((obj) => {
@@ -36,9 +42,7 @@ export function isElementInArray(arr, e){
         }else {
             console.log(e + ' doesnt equals ' + f)
         }
-
     }
-
     return res;
 }
 export function getElementByIDFromArray(arr, id){
@@ -70,4 +74,21 @@ export async function waitSeconds(time=1200){
             resolve();
         }, time)
     })
+}
+export async function parseListAppendCustomer(arr){
+    const new_arr = arr;
+    for(const o of arr){
+        o.color = o.customer[0]?.color;
+        o.company = o.customer[0]?.name;
+    }
+    return new_arr;
+}
+export async function parseListAppendProject(arr){
+    const new_arr = arr;
+    for(const o of arr){
+        o.projectName = o.project[0]?.projectName;
+        o.projectType = o.project[0]?.projectType;
+    }
+    console.log(new_arr)
+    return new_arr;
 }

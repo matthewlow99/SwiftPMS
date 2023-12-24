@@ -20,20 +20,16 @@ function CreateProjectForm({dismiss}){
             customerID
         }
 
-        await apiRequest('project/new', body)
-        await load().then(dismiss)
+        await apiRequest('project/new', body).then(() => load).then(dismiss)
     }
 
     return (<>
         <div className={'modalBackground'}>
-            <div className={'modalContainer'}>
-                <h2 id={'closeButton'} onClick={() => {dismiss()}}>X</h2>
-                <h1 style={{textAlign: 'center', margin: 0}}>Create New Project</h1>
-
-                <input placeholder={'Project Name'} onChange={({target}) => {setName(target.value)}}/>
-
+            <div className={'flex flex-col w-[20%] gap-5 bg-gray-400 p-5 rounded border-black border-[1px] shadow'}>
+                <h1 className={'text-left font-bold'}>Create New Project</h1>
+                <input className={'border-black border-[1px] p-1'} placeholder={'Project Name'} onChange={({target}) => {setName(target.value)}}/>
                 <div>
-                    <select style={{height: 40}} onChange={({target}) => {setCustomerID(target.value)}}>
+                    <select className={'w-full p-1 border-black border-[1px]'} onChange={({target}) => {setCustomerID(target.value)}}>
                         <option value={null}>Select Customer</option>
                         {
                             customers.map((e, ind) => {
@@ -44,7 +40,7 @@ function CreateProjectForm({dismiss}){
                 </div>
 
                 <div>
-                    <select style={{height: 40}} onChange={({target}) => {setProjectType(target.value)}}>
+                    <select className={'w-full p-1 border-black border-[1px]'} onChange={({target}) => {setProjectType(target.value)}}>
                         <option value={null}>Project Type</option>
                         <option>Custom Website</option>
                         <option>Website Maintenance</option>
@@ -56,8 +52,9 @@ function CreateProjectForm({dismiss}){
                 </div>
 
 
-                <div id={'buttonRow'} onClick={create}>
-                    <h2 style={{textAlign: 'center'}} >Create</h2>
+                <div className={'flex flex-row gap-2'}>
+                    <h2 className={'bg-blue-500 w-fit px-3 py-1 border-black border-[1px] rounded shadow font-bold hover:bg-blue-600 hover:cursor-pointer transition-all text-white'} onClick={create}>Create</h2>
+                    <h2 className={'bg-gray-500 w-fit px-3 py-1 border-black border-[1px] rounded shadow font-bold hover:bg-gray-600 hover:cursor-pointer transition-all text-white'} onClick={dismiss}>Cancel</h2>
                 </div>
 
             </div>
