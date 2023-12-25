@@ -35,7 +35,7 @@ function CreateTicketForm({dismiss}){
 
                 <div>
                     <select onChange={({target}) => { setCustomerID(target.value) }} className={'w-full py-2 rounded border-[1px] border-black'}>
-                        <option value={null}>Select Customer</option>
+                        <option value={null}>Select Company</option>
                         {
                             context.customers.map(e => {
                                 return <option value={e?._id}>{e?.name}</option>

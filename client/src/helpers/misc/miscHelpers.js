@@ -92,3 +92,19 @@ export async function parseListAppendProject(arr){
     console.log(new_arr)
     return new_arr;
 }
+function getAllValues(obj) {
+    let result = [];
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            if (typeof obj[key] === 'object' && obj[key] !== null) {
+                result = result.concat(getAllValues(obj[key]));
+            } else {
+                result.push(obj[key]);
+            }
+        }
+    }
+    return result;
+}
+export async function filterArrayByKey(data, filterID=""){
+    return data.filter(obj => getAllValues(obj).includes(filterID))
+}

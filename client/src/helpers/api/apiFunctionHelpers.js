@@ -38,7 +38,7 @@ export async function apiRequest(route, body={}, returnResponse=false, appendSta
     }
 
     const response = await fetch(`${address}/${route}`, settings)
-    console.log('Status ' + response.status + ' from ' + `${address}/${route}`)
+    // console.log('Status ' + response.status + ' from ' + `${address}/${route}`)
 
     if(returnResponse) return response;
 

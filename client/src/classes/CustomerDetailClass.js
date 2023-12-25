@@ -20,8 +20,29 @@ class CustomerDetailClass extends ItemAbstractClass{
             this.title = data.name;
             this.color = data.color;
         })
-        this.tickets = this.linkProjectsToTickets()
     }
+
+    getTickets(){
+        this.tickets = this.linkProjectsToTickets()
+        for(const ticket of this.tickets){
+            ticket.color = this.color;
+            ticket.company = this.title;
+            ticket.projectName = ticket.project.projectName;
+        }
+        return this.tickets;
+    }
+    getProjects(){
+        for(const project of this.projects){
+            project.company = this.title;
+            project.color = this.color;
+        }
+        return this.projects;
+    }
+    getAssets(){
+        console.log(this.assets)
+    }
+
+
     async postNote(note){
         await apiRequest('customer/add_note', {customerID: this.objectID, note})
     }

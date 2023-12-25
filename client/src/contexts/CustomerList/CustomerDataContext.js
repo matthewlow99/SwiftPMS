@@ -15,8 +15,8 @@ export function CustomerDataContext({children}){
     const [customer, setCustomer] = useState({})
     const nav = useNavigate();
     const obj = new CustomerDetailClass(useParams().customerID)
-
     async function load(){
+
         isLoading(true)
         // await obj.loadObject().then(() => {setCustomer(obj)})
         await Promise.all([

@@ -19,7 +19,6 @@ function SideBar(){
 
     const nav = useNavigate()
     const {pathname} = useLocation();
-    console.log(pathname)
     const {clearTokens} = useSessionContext();
 
     function getBackgroundColor(path){

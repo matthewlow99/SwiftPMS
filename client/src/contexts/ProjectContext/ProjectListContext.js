@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import TableList from "../../components/tables/TableList";
 import CreateProjectForm from "../../components/popup/Projects/CreateProjectForm";
 import {
-    appendColorToObjectList,
+    appendColorToObjectList, filterArrayByKey,
     parseListAppendCustomer,
     parseListCustomer,
     parseListForTable
@@ -17,7 +17,7 @@ export function useProjectListContext(){
     return useContext(_ProjectListContext)
 }
 
-export function ProjectListContext({children}){
+export function ProjectListContext({filter}){
 
     const [loading, isLoading] = useState(true)
     const [projects, setProjects] = useState([])
@@ -32,8 +32,8 @@ export function ProjectListContext({children}){
 
     async function load(){
         await Promise.all([
-            apiRequest('project/list', {}, false, false).then(data=>parseListAppendCustomer(data)).then(data => {setProjects(data)}).catch((e) => {console.log(e)}),
-            apiRequest('customer/list',).then(data => {setCustomers(data)}).catch((e) => {console.log(e)})
+            apiRequest('project/list', {}, false, false).then(data => filterArrayByKey(data, filter)).then(data=>parseListAppendCustomer(data)).then(data => {setProjects(data)}).catch((e) => {console.log(e)}),
+            apiRequest('customer/list',).then(data => filterArrayByKey(data, filter)).then(data => {setCustomers(data)}).catch((e) => {console.log(e)})
         ]).then(() => {isLoading(false)})
     }
 

@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom";
 import TableList from "../../components/tables/TableList";
 import CreateTicketForm from "../../components/popup/Tickets/CreateTicketForm";
 import {
+    filterArrayByKey,
     parseListAppendCustomer,
     parseListAppendProject,
     parseListCustomer,
@@ -17,10 +18,9 @@ export function useTicketListContext(){
     return useContext(TicketListDataContext)
 }
 
-export function TicketListContext({children}){
+export function TicketListContext({filter}){
 
     const [loading, isLoading] = useState(true)
-
     const createTicket = (dismiss) => <CreateTicketForm dismiss={dismiss}/>
 
     const [tickets, setTickets] = useState([]);
@@ -40,11 +40,10 @@ export function TicketListContext({children}){
     async function load(){
         isLoading(true)
         await Promise.all([
-            apiRequest('ticket/list').then(data => parseListAppendCustomer(data)).then(data=>parseListAppendProject(data)).then(data => {setTickets(data)}).catch(() => {nav('/')}),
-            apiRequest('customer/list').then(data => {setCustomers(data)}).catch(() => {nav('/')}),
-            apiRequest('project/list').then(data => {setProjects(data)}).catch(() => {nav('/')})
+            apiRequest('ticket/list').then(data => filterArrayByKey(data, filter)).then(data => parseListAppendCustomer(data)).then(data=>parseListAppendProject(data)).then(data => {setTickets(data)}).catch(() => {nav('/')}),
+            apiRequest('customer/list').then(data => filterArrayByKey(data, filter)).then(data => {setCustomers(data)}).catch(() => {nav('/')}),
+            apiRequest('project/list').then(data => filterArrayByKey(data, filter)).then(data => {setProjects(data)}).catch(() => {nav('/')})
         ]).then(() => {isLoading(false)})
-
     }
 
     useEffect(() => { load().then() }, [])

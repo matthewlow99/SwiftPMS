@@ -8,13 +8,16 @@ class TicketDataClass extends ItemAbstractClass{
         super();
         this.objectID = ticketID;
         this.tickets = null;
-
     }
     async loadObject(){
         await apiRequest('ticket/fetch', {ticketID: this.objectID}).then(async (data) => {
+
+            console.log(data)
+
             this.title = data.ticketSubject
             this.projects = data.projects
             this.contacts = data.contacts;
+            this.color = data.customer[0].color;
             this.assets = data.assets;
             this.description = data.description;
             this.createdDate = data.createdDate;
