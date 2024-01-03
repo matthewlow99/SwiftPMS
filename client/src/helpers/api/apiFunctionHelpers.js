@@ -1,8 +1,10 @@
 import {useNavigate} from "react-router-dom";
 
 // const address = 'http://192.168.1.121:3050'
-// const address = '';
-const address = 'https://swiftpms.dev'
+const address = '';
+// const address = 'https://swiftpms.dev'
+
+
 let refreshingToken = null;
 export async function refreshToken(){
     if(refreshingToken) return refreshingToken;

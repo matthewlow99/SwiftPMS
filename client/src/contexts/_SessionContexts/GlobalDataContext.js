@@ -16,7 +16,7 @@ export function GlobalDataContext({children}){
 
     const [loading, isLoading] = useState(true);
 
-    const [customers, setCustomers] = useState({})
+    const [customers, setCustomers] = useState([])
     const [tickets, setTickets] = useState([])
     const [projects, setProjects] = useState([])
 
@@ -28,10 +28,11 @@ export function GlobalDataContext({children}){
         if(logged){
             load().then();
         }
+        isLoading(false)
     }, [logged]);
 
     async function load(){
-        await Promise.all([fetchTickets(), fetchProjects(), fetchCustomers(), waitSeconds(1000)]).then(() => isLoading(false))
+        await Promise.all([fetchTickets(), fetchProjects(), fetchCustomers(), waitSeconds(1000)])
     }
     async function createCustomer(customerObj){
         await apiRequest('customer/new', customerObj).then(fetchCustomers)
