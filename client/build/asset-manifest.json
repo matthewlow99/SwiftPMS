@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/static/css/main.e570b43c.css",
-    "main.js": "/static/js/main.8f844301.js",
+    "main.js": "/static/js/main.0bdf895c.js",
     "static/js/787.d5fa4d18.chunk.js": "/static/js/787.d5fa4d18.chunk.js",
     "static/media/page_load.gif": "/static/media/page_load.2cf3da20942a1e6897c6.gif",
     "static/media/logo_alt_color.png": "/static/media/logo_alt_color.5ac1392f7e49d3f2ac6a.png",
     "static/media/bare_logo.png": "/static/media/bare_logo.0495002dc3ff6db1fe3a.png",
     "index.html": "/index.html",
     "main.e570b43c.css.map": "/static/css/main.e570b43c.css.map",
-    "main.8f844301.js.map": "/static/js/main.8f844301.js.map",
+    "main.0bdf895c.js.map": "/static/js/main.0bdf895c.js.map",
     "787.d5fa4d18.chunk.js.map": "/static/js/787.d5fa4d18.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e570b43c.css",
-    "static/js/main.8f844301.js"
+    "static/js/main.0bdf895c.js"
   ]
 }

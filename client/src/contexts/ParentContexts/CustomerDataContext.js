@@ -51,10 +51,10 @@ export function CustomerDataContext({children}){
     const createAssetForm = (dismiss) => <CreateAssetForm dismiss={dismiss} useParentContext={useCustomerDataContext}/>
     const createContactForm = (dismiss) => <CreateContactForm dismiss={dismiss} useParentContext={useCustomerDataContext}/>
 
-    useEffect(() => load, [])
+    useEffect(() => {load().then(() => isLoading(false))}, [])
 
     async function load(){
-        await Promise.all([fetchCustomers(), fetchAssets(), fetchNotes(), fetchContacts(), fetchTickets(), fetchProjects(), waitSeconds(1000)]).then(() => isLoading(false))
+        await Promise.all([fetchCustomers(), fetchAssets(), fetchNotes(), fetchContacts(), fetchTickets(), fetchProjects(), waitSeconds(1000)])
     }
     async function postNote(note){ await apiRequest('customer/add_note', {note, id: customerID}).then(fetchNotes) }
     async function createTicket(ticketObj){ await apiRequest('ticket/new', ticketObj).then(fetchTickets) }
