@@ -4,7 +4,7 @@ import FullscreenModal from "../../popup/FullscreenModal";
 import CreateContactForm from "../../popup/Contacts/CreateContactForm";
 import CreateContactInCustomer from "../../popup/Contacts/CreateContactInCustomer";
 import AssetLinkEntry from "../asset/AssetLinkEntry";
-import ListCustomerAssets from "../../popup/Assets/ListCustomerAssets";
+import ListCustomerAssets from "../../popup/Assets/LinkCustomerAssets";
 import LinkCustomerContacts from "../../popup/Contacts/LinkCustomerContacts";
 import asset from "../../../pages/asset/Asset";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

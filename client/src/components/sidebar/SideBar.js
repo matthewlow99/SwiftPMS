@@ -35,7 +35,7 @@ function SideBar(){
             <p className={`side-menu-item ${getBackgroundColor('/customers')}`} onClick={() => {nav('/customers')}} title={'Customers'}><FontAwesomeIcon icon={faBuilding} style={{marginRight: 5}}/> </p>
             <p className={`side-menu-item ${getBackgroundColor('/tickets')}`} onClick={() => {nav('/tickets')}} title={'Tickets'}><FontAwesomeIcon icon={faTicket} style={{marginRight: 5}}/> </p>
             <p className={`side-menu-item ${getBackgroundColor('/projects')}`} onClick={() => {nav('/projects')}} title={'Projects'}><FontAwesomeIcon icon={faFolder} style={{marginRight: 5}}/> </p>
-            <p className={`side-menu-item ${getBackgroundColor('/endpoints')}`} onClick={() => {nav('/endpoints')}} title={'Endpoint Logging'}><FontAwesomeIcon icon={faServer} style={{marginRight: 5}}/></p>
+            {/*<p className={`side-menu-item ${getBackgroundColor('/endpoints')}`} onClick={() => {nav('/endpoints')}} title={'Endpoint Logging'}><FontAwesomeIcon icon={faServer} style={{marginRight: 5}}/></p>*/}
             <p className={'side-menu-item'} onClick={() => {clearTokens().then(() => nav('/login'))}} title={'Sign Out'}><FontAwesomeIcon icon={faSignOut} style={{marginRight: 5}}/> </p>
         </div>
     )

@@ -1,3 +1,5 @@
+import {getUrl} from "../api/apiFunctionHelpers";
+
 export function validateInput(arr=[]){
     let isValid = true;
     arr.forEach(e => {
@@ -77,20 +79,29 @@ export async function waitSeconds(time=1200){
 }
 export async function parseListAppendCustomer(arr){
     const new_arr = arr;
-    for(const o of arr){
-        o.color = o.customer[0]?.color;
-        o.company = o.customer[0]?.name;
+    try{
+        for(const o of arr){
+            o.color = o.customer?.color || o.customer[0]?.color;
+            o.company = o.customer?.name || o.customer[0]?.name;
+        }
+    } catch (e) {
+        console.log(e.toString())
     }
     return new_arr;
 }
 export async function parseListAppendProject(arr){
     const new_arr = arr;
     for(const o of arr){
-        o.projectName = o.project[0]?.projectName;
-        o.projectType = o.project[0]?.projectType;
+        o.projectName = o.project.projectName || o.project[0]?.projectName;
+        o.projectType = o.project.projectType || o.project[0]?.projectType;
     }
-    console.log(new_arr)
     return new_arr;
+}
+export async function parseEndpointList(arr){
+    for(const o of arr){
+        o.url = getUrl() + '/.../' + o.urlHandle
+    }
+    return arr;
 }
 function getAllValues(obj) {
     let result = [];
@@ -105,6 +116,7 @@ function getAllValues(obj) {
     }
     return result;
 }
-export async function filterArrayByKey(data, filterID=""){
-    return data.filter(obj => getAllValues(obj).includes(filterID))
+export async function filterArrayByKey(data, filterID){
+    console.log(filterID)
+    return filterID ? data.filter(obj => getAllValues(obj).includes(filterID)) : data;
 }

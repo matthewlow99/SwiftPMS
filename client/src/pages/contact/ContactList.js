@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import ContactPageGridEntry from "../../components/item/contact/ContactPageGridEntry";
 import CreateContactForm from "../../components/popup/Contacts/CreateContactForm";
-import {useContactListContext} from "../../contexts/ContactContext/ContactContext";
+import {useContactListContext} from "../../contexts/TableContexts/ContactContext";
 import FullscreenModal from "../../components/popup/FullscreenModal";
 
 function ContactList(){

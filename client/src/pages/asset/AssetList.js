@@ -4,7 +4,7 @@ import AssetPageListEntry from "../../components/item/asset/AssetPageListEntry";
 import {useNavigate} from "react-router-dom";
 import CreateAssetForm from "../../components/popup/Assets/CreateAssetForm";
 import FullscreenModal from "../../components/popup/FullscreenModal";
-import {useAssetListContext} from "../../contexts/AssetContext/AssetListContext";
+import {useAssetListContext} from "../../contexts/TableContexts/AssetListContext";
 
 function AssetList(){
 

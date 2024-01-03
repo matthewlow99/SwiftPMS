@@ -5,6 +5,7 @@ const env = require('dotenv')
 const path = require('path')
 
 env.config()
+app.set('trust proxy', true)
 app.use(cors({
     method: ['GET', 'POST'],
     origin: '*'

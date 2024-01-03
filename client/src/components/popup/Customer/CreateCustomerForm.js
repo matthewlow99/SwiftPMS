@@ -2,9 +2,11 @@ import React, {useState} from "react"
 import {validateInput} from "../../../helpers/misc/miscHelpers";
 import {apiRequest} from "../../../helpers/api/apiFunctionHelpers";
 import {useNavigate} from "react-router-dom";
-import {useCustomerListContext} from "../../../contexts/CustomerList/CustomerListContext";
+import {useCustomerListContext} from "../../../contexts/TableContexts/CustomerListContext";
 
-function CreateCustomerForm({dismiss}){
+function CreateCustomerForm({dismiss, useParentContext}){
+
+    const {createCustomer} = useParentContext();
 
     const colors = [
         "#FF5252", // Red
@@ -22,8 +24,6 @@ function CreateCustomerForm({dismiss}){
         "#AA00FF", // Violet (Vibrant)
     ];
 
-    const {load} = useCustomerListContext()
-
     const [customerName, setCustomerName] = useState("")
     const [customerEmail, setCustomerEmail] = useState("")
     const [customerPhone, setCustomerPhone] = useState("")
@@ -35,7 +35,8 @@ function CreateCustomerForm({dismiss}){
     async function createSubmit(){
         if(!validateInput([customerName])) return;
         try{
-            await apiRequest('customer/new', {customerName, customerEmail, customerPhone, color}).then(() => load()).then(dismiss)
+            return await createCustomer({customerName, customerEmail, customerPhone, color}).then(dismiss)
+            // await apiRequest('customer/new', {customerName, customerEmail, customerPhone, color}).then(() => load()).then(dismiss)
         } catch (e) {
             alert(e)
         }

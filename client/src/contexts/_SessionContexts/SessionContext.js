@@ -11,7 +11,7 @@ export function useSessionContext(){
 export function SessionContext({children}){
 
 
-
+    const [logged, isLogged] = useState(false)
     const nav = useNavigate();
     // const [loading, isLoading] = useState(true)
 
@@ -41,9 +41,10 @@ export function SessionContext({children}){
         localStorage.clear()
     }
     function checkLoginStatus(){
+        isLogged(!!localStorage.getItem('accessToken'))
         return !!localStorage.getItem('accessToken');
     }
 
     // if(loading) return <LoadingScreen />
-    return <_SessionContext.Provider value={{checkLoginStatus, login, clearTokens, validateToken}}>{children}</_SessionContext.Provider>
+    return <_SessionContext.Provider value={{checkLoginStatus, login, clearTokens, validateToken, logged}}>{children}</_SessionContext.Provider>
 }

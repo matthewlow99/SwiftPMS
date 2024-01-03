@@ -11,7 +11,7 @@ const AssetListDataContext = createContext();
 export function useAssetListContext(){
     return useContext(AssetListDataContext)
 }
-export function AssetListContext({filter}){
+export function AssetListContext({urlPrefix, id}){
     const [loading, isLoading] = useState(true)
     const [assets, setAssets] = useState([])
     const [customers, setCustomers] = useState([])
@@ -27,8 +27,8 @@ export function AssetListContext({filter}){
 
     async function load(){
         const [assets_response, customers_response] = await Promise.all([
-            apiRequest('asset/list').then(data => filterArrayByKey(data, filter)).then(data => parseListAppendCustomer(data)).catch(() => {nav('/')}),
-            apiRequest('customer/list').then(data => filterArrayByKey(data, filter)).catch(() => {nav('/')})
+            apiRequest(`${urlPrefix}/fetch/assets`, {id}).then(data => parseListAppendCustomer(data)).catch(() => {nav('/')}),
+            apiRequest(`${urlPrefix}/fetch/customers`, {id}).catch(() => {nav('/')})
         ])
         setCustomers(customers_response)
         setAssets(assets_response)

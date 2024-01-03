@@ -1,11 +1,11 @@
 import React, {useState} from "react"
-import {useProjectListContext} from "../../../contexts/ProjectContext/ProjectListContext";
+import {useProjectListContext} from "../../../contexts/TableContexts/ProjectListContext";
 import {validateInput} from "../../../helpers/misc/miscHelpers";
 import {apiRequest} from "../../../helpers/api/apiFunctionHelpers";
 
-function CreateProjectForm({dismiss}){
+function CreateProjectForm({dismiss, useParentContext}){
 
-    const {customers, load} = useProjectListContext()
+    const {customers, createProject} = useParentContext()
 
     const [name, setName] = useState("")
     const [customerID, setCustomerID] = useState("")
@@ -13,14 +13,12 @@ function CreateProjectForm({dismiss}){
 
     async function create(){
         if(!validateInput([name, customerID, projectType])) return;
-
         const body = {
             name,
             type: projectType,
             customerID
         }
-
-        await apiRequest('project/new', body).then(() => load).then(dismiss)
+        await createProject(body).then(dismiss)
     }
 
     return (<>

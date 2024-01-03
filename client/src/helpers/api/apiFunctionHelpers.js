@@ -25,7 +25,7 @@ export async function refreshToken(){
         return refreshingToken;
     }
 }
-
+export function getUrl(){ return address }
 export async function apiRequest(route, body={}, returnResponse=false, appendStatus=false){
     const settings = {
         headers: {

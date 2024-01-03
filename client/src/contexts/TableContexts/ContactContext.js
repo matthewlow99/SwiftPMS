@@ -11,7 +11,7 @@ const _ContactContext = createContext();
 export function useContactListContext(){
     return useContext(_ContactContext)
 }
-export function ContactContext({filter}){
+export function ContactContext({urlPrefix, id}){
 
     const [loading, isLoading] = useState(true)
     const [contacts, setContacts] = useState([])
@@ -23,10 +23,9 @@ export function ContactContext({filter}){
     const createForm = (dismiss) => <CreateContactForm dismiss={dismiss}/>
 
     async function load(){
-
         await Promise.all([
-            apiRequest('customer/list').then(data => filterArrayByKey(data, filter)).then(data => {setCustomers(data)}).catch(() => {nav('/')}),
-            apiRequest('contact/list').then(data => filterArrayByKey(data, filter)).then(data => parseListAppendCustomer(data)).then(data => {setContacts(data)}).catch(() => {nav('/')})
+            apiRequest(`${urlPrefix}/fetch/customers`, {id}).then(data => {setCustomers(data)}).catch(() => {nav('/')}),
+            apiRequest(`${urlPrefix}/fetch/contacts`, {id}).then(data => parseListAppendCustomer(data)).then(data => {setContacts(data)}).catch(() => {nav('/')})
         ]).then(() => {isLoading(false)})
     }
 

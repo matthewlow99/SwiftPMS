@@ -2,6 +2,9 @@ const express = require('express')
 const router = express.Router()
 const db = require('../../db/db_connect')
 const {getCurrentDate} = require("../../helpers/dateFunctions");
+const dataRouter = require('./asset_data_router')
+
+router.use('/fetch', dataRouter)
 
 router.post('/list', async (req, res) => {
     try {
@@ -60,46 +63,6 @@ router.post('/new', async (req, res) => {
         return res.status(500).send(e)
     }
 })
-router.post('/fetch', async (req, res) => {
-    try {
-        const assetID = db.objectID(req.body.assetID);
-        const {tenantID} = res.locals.user;
-        const list = await db.databaseQuery(async (client) =>{
-            return await client.collection('assets').aggregate([
-                {$match: {"_id": assetID}},
-                {$match: {"tenantID": tenantID}},
-                {
-                    $lookup: {
-                        from: 'contacts',
-                        localField: 'contacts',
-                        foreignField: '_id',
-                        as: 'contacts'
-                    }
-                },
-                {
-                    $lookup: {
-                        from: 'asset_notes',
-                        localField: 'notes',
-                        foreignField: '_id',
-                        as: 'notes'
-                    }
-                },
-                {
-                    $lookup: {
-                        from: 'customers',
-                        localField: 'customerID',
-                        foreignField: '_id',
-                        as: 'customer'
-                    }
-                }
-            ]).toArray()
-        })
-        return res.status(200).send(list[0])
-    } catch (e) {
-        return res.status(500).send(e)
-    }
-})
-
 router.post('/link_contacts', async (req, res) => {
     try{
         const assetID = db.objectID(req.body.assetID);
@@ -132,14 +95,7 @@ router.post('/add_note', async (req, res) => {
         const date = getCurrentDate();
 
         const {insertedId} = await db.databaseQuery(async (client) => {
-            return await client.collection('asset_notes').insertOne({note, authorName, date})
-        })
-
-        await db.databaseQuery(async (client) => {
-            await client.collection('assets').updateOne(
-                {'_id': assetID},
-                {$push: {"notes": insertedId}}
-            )
+            return await client.collection('asset_notes').insertOne({note, authorName, date, assetID})
         })
 
         return res.status(200).send({message: 'success'})

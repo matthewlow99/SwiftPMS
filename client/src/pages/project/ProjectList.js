@@ -4,7 +4,7 @@ import FullscreenModal from "../../components/popup/FullscreenModal";
 import CreateAssetForm from "../../components/popup/Assets/CreateAssetForm";
 import ProjectListEntry from "./ProjectListEntry";
 import CreateProjectForm from "../../components/popup/Projects/CreateProjectForm";
-import {useProjectListContext} from "../../contexts/ProjectContext/ProjectListContext";
+import {useProjectListContext} from "../../contexts/TableContexts/ProjectListContext";
 
 function ProjectList(){
 

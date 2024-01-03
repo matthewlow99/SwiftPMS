@@ -13,10 +13,13 @@ const tenantRouter = require('./company/tenant_router')
 const userRouter = require('./company/user_router')
 const loginRouter = require('./login/login_router')
 const endpointRouter = require('./endpoints/endpoint_router')
+const endpointHandler = require('./endpoints/endpoint_handler')
 
 const {TokenExpiredError} = require("jsonwebtoken");
 
 app.use('/pub', loginRouter)
+
+app.use('/e', endpointHandler)
 
 app.use((req, res, next) => {
     const accessToken = req.headers.authorization;

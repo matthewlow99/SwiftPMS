@@ -5,12 +5,12 @@ import NoteEntry from "../../components/notes/NoteEntry";
 import NoteTextInput from "../../components/notes/NoteTextInput";
 import ContactLinkEntry from "../../components/item/contact/ContactLinkEntry";
 import AssetLinkEntry from "../../components/item/asset/AssetLinkEntry";
-import {useCustomerDataContext} from "../../contexts/CustomerList/CustomerDataContext";
+import {useCustomerDataContext} from "../../contexts/ParentContexts/CustomerDataContext";
 import SideContent from "../../components/item/detail/SideContent";
 import TicketLinks from "../../components/item/detail/TicketLinks";
 import ProjectLinks from "../../components/item/detail/ProjectLinks";
 import NoteView from "../../components/item/views/NoteView";
-import {useTicketDataContext} from "../../contexts/TicketData/TicketDataContext";
+import {useTicketDataContext} from "../../contexts/ParentContexts/TicketDataContext";
 
 function Ticket(){
     const {ticketID} = useParams()

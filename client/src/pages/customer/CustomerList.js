@@ -4,7 +4,7 @@ import CreateTicketForm from "../../components/popup/Tickets/CreateTicketForm";
 import CustomerListEntry from "../../components/item/customer/CustomerListEntry";
 import CreateCustomerForm from "../../components/popup/Customer/CreateCustomerForm";
 import FullscreenModal from "../../components/popup/FullscreenModal";
-import {useCustomerListContext} from "../../contexts/CustomerList/CustomerListContext";
+import {useCustomerListContext} from "../../contexts/TableContexts/CustomerListContext";
 import ListEntryText from "../../components/item/_entryComponents/ListEntryText";
 import {faBuilding} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";

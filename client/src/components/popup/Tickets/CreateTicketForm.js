@@ -1,28 +1,27 @@
 import React, {useEffect, useState} from "react"
 import '../../../css/modals.css'
-import {useTicketListContext} from "../../../contexts/TicketList/TicketListContext";
+import {useTicketListContext} from "../../../contexts/TableContexts/TicketListContext";
 import {removeDuplicates, validateInput} from "../../../helpers/misc/miscHelpers";
 import {apiRequest} from "../../../helpers/api/apiFunctionHelpers";
 
-function CreateTicketForm({dismiss}){
+function CreateTicketForm({dismiss, useParentContext}){
 
-    const context = useTicketListContext();
+    const {customers, projects, createTicket} = useParentContext();
+
+    console.log(customers)
 
     const [subject, setSubject] = useState("")
     const [desc, setDesc] = useState("")
 
-    const [customerID, setCustomerID] = useState("")
+    const [customerID, setCustomerID] = useState(customers.length === 1 ? customers[0]._id : null)
     const [projectID, setProjectID] = useState("")
 
-    // console.log(contacts)
-
-    async function createTicket(){
+    async function create(){
         if(!validateInput([subject, desc, customerID])) return;
         const body = {
             subject, desc, customerID, projectID
         }
-        await apiRequest('ticket/new', body)
-        await context.load().then(dismiss)
+        await createTicket(body).then(dismiss).catch(() => alert('Error creating ticket'))
     }
 
     return (
@@ -35,9 +34,9 @@ function CreateTicketForm({dismiss}){
 
                 <div>
                     <select onChange={({target}) => { setCustomerID(target.value) }} className={'w-full py-2 rounded border-[1px] border-black'}>
-                        <option value={null}>Select Company</option>
+                        <option value={customers.length === 1 ? customers[0]._id : null}>{customers.length === 1 ? customers[0].name : "Select a company"}</option>
                         {
-                            context.customers.map(e => {
+                            customers.length >= 1 && customers.map(e => {
                                 return <option value={e?._id}>{e?.name}</option>
                             })
                         }
@@ -48,7 +47,7 @@ function CreateTicketForm({dismiss}){
                     <select onChange={({target}) => { setProjectID(target.value) }} className={'w-full py-2 rounded border-[1px] border-black'}>
                         <option value={null}>Select Project</option>
                         {
-                            context.projects.filter(g => g?.customer[0]?._id === customerID).map(e => {
+                            projects.filter(g => g?.customer?._id === customerID).map(e => {
                                 return <option value={e?._id}>{e?.projectName}</option>
                             })
                         }
@@ -57,7 +56,7 @@ function CreateTicketForm({dismiss}){
 
 
                 <div className={'flex flex-row gap-2'}>
-                    <h2 className={'bg-blue-500 w-fit px-3 py-1 border-black border-[1px] rounded shadow font-bold hover:bg-blue-600 hover:cursor-pointer transition-all text-white'} onClick={createTicket}>Create</h2>
+                    <h2 className={'bg-blue-500 w-fit px-3 py-1 border-black border-[1px] rounded shadow font-bold hover:bg-blue-600 hover:cursor-pointer transition-all text-white'} onClick={create}>Create</h2>
                     <h2 className={'bg-gray-500 w-fit px-3 py-1 border-black border-[1px] rounded shadow font-bold hover:bg-gray-600 hover:cursor-pointer transition-all text-white'} onClick={dismiss}>Cancel</h2>
                 </div>
 

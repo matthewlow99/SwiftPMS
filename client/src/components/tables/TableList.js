@@ -15,9 +15,10 @@ import FullscreenModal from "../popup/FullscreenModal";
  * @returns {Element}
  * @constructor
  */
-function TableList({keyMap={}, list=[], navPrefix='/', createForm}){
+function TableList({keyMap={}, list=[], navPrefix='/', createForm, linkForm}){
 
     const [showCreate, setShowCreate] = useState(false)
+    const [showLink, setShowLink] = useState(false)
     const mapLength = Object.keys(keyMap).length;
     const listLength = list.length;
     const nav = useNavigate();
@@ -56,14 +57,20 @@ function TableList({keyMap={}, list=[], navPrefix='/', createForm}){
                 }
                 </tbody>
             </table>
-            {
-                createForm && <div className={'flex flex-row justify-left m-3'}>
-                                    <button className={'bg-blue-500 w-fit px-3 py-1 border-black border-[1px] rounded shadow font-bold hover:bg-blue-600 hover:cursor-pointer transition-all text-white'} style={{borderRadius: 10}} onClick={() => {setShowCreate(prev => !prev)}}>New</button>
-                                    <button className={'list-button'} style={{borderRadius: 10}}>Show Closed</button>
-                                </div>
-            }
+
+            <div className={'flex flex-row justify-left m-3 gap-3'}>
+                {
+                    createForm && <button className={'bg-blue-500 w-fit px-3 py-1 border-black border-[1px] rounded shadow font-bold hover:bg-blue-600 hover:cursor-pointer transition-all text-white'} style={{borderRadius: 10}} onClick={() => {setShowCreate(prev => !prev)}}>New</button>
+                }
+                {
+                    linkForm && <button className={'bg-blue-500 w-fit px-3 py-1 border-black border-[1px] rounded shadow font-bold hover:bg-blue-600 hover:cursor-pointer transition-all text-white'} style={{borderRadius: 10}} onClick={() => {setShowLink(prev => !prev)}}>Link Existing</button>
+                }
+                {/*<button className={'list-button'} style={{borderRadius: 10}}>Show Closed</button>*/}
+            </div>
+
         </div>
         {createForm && <FullscreenModal visible={showCreate} formElement={createForm(() => setShowCreate(false))} />}
+        {linkForm && <FullscreenModal visible={showLink} formElement={linkForm(() => setShowLink(false))}/>}
     </>)
 }
 

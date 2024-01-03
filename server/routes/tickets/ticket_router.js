@@ -2,13 +2,22 @@ const express = require('express')
 const router = express.Router()
 const db = require('../../db/db_connect')
 const {getCurrentDate} = require("../../helpers/dateFunctions");
+const {objectID, objectIDJSON} = require("../../db/db_connect");
+const dataRouter = require('./ticket_data_router');
+
+router.use('/fetch', dataRouter)
 
 router.post('/list', async (req, res) => {
     const {tenantID} = res.locals.user;
+    const filter = objectIDJSON(req.body.filter) || {};
+
     const list = await db.databaseQuery(async (client) => {
         return client.collection('tickets').aggregate([
             {
-                $match: {"tenantID": tenantID}
+                $match: {tenantID: tenantID}
+            },
+            {
+                $match: filter
             },
             {
                 $lookup: {
@@ -25,16 +34,21 @@ router.post('/list', async (req, res) => {
                     foreignField: '_id',
                     as: 'project'
                 }
-            }
+            },
+            {
+                $unwind: "$customer"
+            },
+            {
+                $unwind: "$project"
+            },
         ]).toArray()
     })
+    console.log(req.body.filter)
     return res.status(200).send(list)
 })
 
 router.post('/new', async (req, res) => {
     try {
-
-
         const ticketSubject = req.body.subject;
         const customerID = db.objectID(req.body.customerID);
         const projectID = db.objectID(req.body.projectID);
@@ -75,72 +89,15 @@ router.post('/new', async (req, res) => {
         return res.status(500).send({error: e.toString()})
     }
 })
-
-router.post('/fetch', async (req, res) => {
-
-    const ticketID = db.objectID(req.body.ticketID);
-    const {tenantID} = res.locals.user;
-    try {
-        const ticket = await db.databaseQuery(async (client) => {
-            return await client.collection('tickets').aggregate([
-                {$match: {"_id": ticketID}},
-                {$match: {"tenantID": tenantID}},
-                {
-                    $lookup: {
-                        from: 'assets',
-                        localField: 'assets',
-                        foreignField: '_id',
-                        as: 'assets'
-                    }
-                },
-                {
-                    $lookup: {
-                        from: 'projects',
-                        localField: 'projectID',
-                        foreignField: '_id',
-                        as: 'projects'
-                    }
-                },
-                {
-                    $lookup: {
-                        from: 'ticket_notes',
-                        localField: 'notes',
-                        foreignField: '_id',
-                        as: 'notes'
-                    }
-                },
-                {
-                    $lookup: {
-                        from: 'contacts',
-                        localField: 'contacts',
-                        foreignField: '_id',
-                        as: 'contacts'
-                    }
-                },
-                {
-                    $lookup: {
-                        from: 'customers',
-                        localField: 'customerID',
-                        foreignField: '_id',
-                        as: 'customer'
-                    }
-                }
-            ]).toArray()
-        })
-        return res.send(ticket[0])
-    } catch (e) {
-        return res.status(500).send([])
-    }
-})
 router.post('/add_note', async (req, res) => {
     try {
-        const ticketID = db.objectID(req.body.ticketID)
+        const ticketID = db.objectID(req.body.id)
         const note = req.body.note;
         const authorName = 'Matthew Low';
         const date = getCurrentDate();
 
         const {insertedId} = await db.databaseQuery(async (client) => {
-            return await client.collection('ticket_notes').insertOne({note, authorName, date})
+            return await client.collection('ticket_notes').insertOne({note, authorName, date, ticketID})
         })
         await db.databaseQuery(async (client) => {
             return await client.collection('tickets').updateOne(

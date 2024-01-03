@@ -3,7 +3,7 @@ import TicketListEntry from "../../components/TicketList/TicketListEntry";
 import '../../css/TicketList.css'
 import CreateTicketForm from "../../components/popup/Tickets/CreateTicketForm";
 import {apiRequest} from "../../helpers/api/apiFunctionHelpers";
-import {useTicketListContext} from "../../contexts/TicketList/TicketListContext";
+import {useTicketListContext} from "../../contexts/TableContexts/TicketListContext";
 import FullscreenModal from "../../components/popup/FullscreenModal";
 
 function TicketList(){
